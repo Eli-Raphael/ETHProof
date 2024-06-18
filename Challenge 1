@@ -1,0 +1,25 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract AdminOnly {
+
+    address public admin;
+
+    constructor() {
+        admin = msg.sender;
+    }
+
+    modifier onlyAdmin() {
+        require(admin == msg.sender , "Only Admin can access");
+        _;
+    }
+
+    function restrictedFunction(string memory newMessage) public onlyAdmin {
+        adminMessage = newMessage;
+    }
+    
+    function changeAdmin(address newAdmin) public onlyAdmin {
+        require(newAdmin != address(0), "Invalid address for new admin");
+        admin = newAdmin;
+    }
+}
