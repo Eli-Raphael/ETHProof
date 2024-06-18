@@ -1,0 +1,27 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract BaseContract {
+    uint public value;
+
+    // Constructor to initialize the value
+    constructor(uint initialValue) {
+        value = initialValue;
+    }
+
+    // View function to read the value
+    function getValue() public view returns (uint) {
+        return value;
+    }
+
+    // Pure function to add two numbers
+    function addNumbers(uint a, uint b) public pure returns (uint) {
+        return a + b;
+    }
+
+    // Payable function to receive ether and update value
+    function updateValue() public payable {
+        require(msg.value > 0, "Send some ether to update the value");
+        value += msg.value;
+    }
+}
